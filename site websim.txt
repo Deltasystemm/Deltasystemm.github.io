@@ -1,0 +1,1061 @@
+<html><head><base href=""><meta charset="UTF-8"/>
+<title>Login Page</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1a1a1a;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.container {
+    background: #2d2d2d;
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    background: #3d3d3d;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    background: #444;
+    border-color: #2D78E2;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: #2D78E2;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.btn:hover {
+    background: #2D78E2;
+    transform: translateY(-2px);
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.forgot-password a, .register-link, .back-to-login {
+    color: #2D78E2;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgot-password a:hover, .register-link:hover, .back-to-login:hover {
+    text-decoration: underline;
+}
+
+.form-toggle {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#registerForm {
+    display: none;
+}
+
+.divider {
+    margin: 20px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.admin-dashboard {
+    display: none;
+    background: #2d2d2d;
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    color: #fff;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.admin-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.logout-btn {
+    padding: 8px 16px;
+    background: #2D78E2;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #3d88e2;
+}
+
+.admin-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.admin-card {
+    background: #3d3d3d;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+.user-dashboard {
+    display: none;
+    background: #2d2d2d;
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    color: #fff;
+}
+
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.user-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.client-list {
+    background: #2d2d2d;
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.client-item {
+    background: #3d3d3d;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.client-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    background: #444;
+}
+
+.client-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+    align-items: center;
+    text-align: left;
+}
+
+.client-info {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-top: 5px;
+    color: #fff;
+}
+
+.client-info a {
+    color: #2D78E2;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.client-info a:hover {
+    color: #3d88e2;
+    text-decoration: underline;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    color: #ff0000;
+    transform: scale(1.1);
+}
+
+.logo-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.logo svg circle {
+    stroke: #2D78E2;
+}
+
+.logo svg path {
+    fill: #2D78E2;
+}
+
+.user-logo-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user-logo-container img {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.user-logo-container img:hover {
+    transform: scale(1.05);
+}
+
+.users-list-page {
+    display: none;
+    background: #2d2d2d;
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    color: #fff;
+}
+
+.users-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.user-card {
+    background: #3d3d3d;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+    align-items: center;
+}
+
+.user-card:hover {
+    background: #444;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.user-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.back-btn {
+    padding: 8px 16px;
+    background: #2D78E2;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #3d88e2;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.user-info h3 {
+    margin-bottom: 10px;
+    color: #2D78E2;
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.user-info strong {
+    color: #2D78E2;
+}
+
+.password-field {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.password-field input {
+    width: 100%;
+}
+
+.password-field .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #2D78E2;
+    transition: color 0.3s ease;
+}
+
+.password-field .password-toggle:hover {
+    color: #3d88e2;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img id="loginLogo" src="" alt="Logo de login" style="width: 150px; height: 150px; border-radius: 50%; display: none;">
+            <svg class="logo" width="150" height="150" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#2D78E2" stroke-width="4"/>
+                <path d="M60,100 Q100,40 140,100 Q100,160 60,100" fill="#2D78E2" opacity="0.8">
+                    <animate attributeName="d" 
+                        dur="3s"
+                        repeatCount="indefinite"
+                        values="M60,100 Q100,40 140,100 Q100,160 60,100;
+                                M60,100 Q100,60 140,100 Q100,140 60,100;
+                                M60,100 Q100,40 140,100 Q100,160 60,100"/>
+                </path>
+            </svg>
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <div class="password-field">
+                    <input type="password" id="password" required>
+                    <i class="fas fa-eye password-toggle" onclick="toggleLoginPasswordVisibility(this)"></i>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn">Entrar</button>
+            
+            <div class="forgot-password">
+                <a href="#" onclick="handleForgotPassword(event)">Esqueceu a senha?</a>
+            </div>
+
+            <div class="form-toggle">
+                <a href="#" class="register-link" onclick="toggleForms('register')">Criar nova conta</a>
+            </div>
+        </form>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="newUsername">Novo Usuário</label>
+                <input type="text" id="newUsername" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="userLogo">Logo do Usuário</label>
+                <input type="file" id="userLogo" accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword">Nova Senha</label>
+                <div class="password-field">
+                    <input type="password" id="newPassword" required>
+                    <i class="fas fa-eye password-toggle" onclick="toggleRegisterPasswordVisibility(this)"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirmar Senha</label>
+                <div class="password-field">
+                    <input type="password" id="confirmPassword" required>
+                    <i class="fas fa-eye password-toggle" onclick="toggleRegisterPasswordVisibility(this)"></i>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn">Cadastrar</button>
+            
+            <a href="#" class="back-to-login" onclick="toggleForms('login')">Voltar para login</a>
+        </form>
+    </div>
+
+    <div class="admin-dashboard" id="adminDashboard">
+        <div class="admin-header">
+            <div class="admin-title">Painel Administrativo</div>
+            <button class="logout-btn" onclick="logout()">Sair</button>
+        </div>
+        <div class="admin-content">
+            <div class="admin-card">
+                <h3>Usuários Cadastrados</h3>
+                <p>150</p>
+            </div>
+            <div class="admin-card">
+                <h3>Total de Postos</h3>
+                <p>0</p>
+            </div>
+            <div class="admin-card">
+                <h3>Total de Acessos</h3>
+                <p>1,234</p>
+            </div>
+            <div class="admin-card">
+                <h3>Relatórios</h3>
+                <p>10</p>
+            </div>
+            <div class="admin-card" style="grid-column: span 2;">
+                <h3>Configuração do Logo</h3>
+                <div class="form-group">
+                    <label for="loginLogoUpload">Upload do Logo de Login</label>
+                    <input type="file" id="loginLogoUpload" accept="image/*" onchange="updateLoginLogo(event)">
+                </div>
+                <div class="logo-preview-container" style="margin-top: 10px;">
+                    <!-- Preview will be shown here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-dashboard" id="userDashboard">
+        <div class="user-header">
+            <div class="user-title">Painel do Usuário</div>
+            <button class="logout-btn" onclick="logout()">Sair</button>
+        </div>
+        
+        <div class="logo-container user-logo-container">
+            <img id="userDashboardLogo" alt="Logo do usuário" style="width: 150px; height: 150px; border-radius: 50%;">
+        </div>
+
+        <div class="client-form">
+            <div class="form-group">
+                <label for="stationName">Nome do Posto</label>
+                <input type="text" id="stationName">
+            </div>
+            <div class="form-group">
+                <label for="ipAddress">Endereço IP</label>
+                <input type="text" id="ipAddress">
+            </div>
+            <div class="form-group">
+                <label for="ddns">DDNS</label>
+                <input type="text" id="ddns">
+            </div>
+            <button class="btn" onclick="addClient()">Adicionar Cliente</button>
+        </div>
+
+        <div class="client-list" id="clientList">
+            <!-- Client items will be added here dynamically -->
+        </div>
+    </div>
+
+    <div class="users-list-page" id="usersListPage">
+        <div class="users-list-header">
+            <div class="admin-title">Usuários Cadastrados</div>
+            <button class="back-btn" onclick="backToAdmin()">Voltar</button>
+        </div>
+        <div id="usersList">
+            <!-- Users will be added here dynamically -->
+        </div>
+    </div>
+
+    <script>
+    let currentUser = null;
+    const userClients = {};
+    const userLogos = {};
+    const userData = {};
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        // Load saved user data
+        const savedUserData = JSON.parse(localStorage.getItem('userData') || '{}');
+        
+        if(username === 'Delta' && password === 'dvr121314') {
+            // Admin login remains the same
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            currentUser = 'admin';
+            updateActiveUsersCount();
+            updateTotalStations();
+            console.log('Admin login successful');
+        } else if(username && password) {
+            // Check if user exists and password matches
+            if (savedUserData[username] && savedUserData[username].password === password) {
+                document.querySelector('.container').style.display = 'none';
+                document.getElementById('userDashboard').style.display = 'block';
+                currentUser = username;
+                if (!userClients[currentUser]) {
+                    userClients[currentUser] = [];
+                }
+                
+                // Load user's logo
+                const savedUserLogos = JSON.parse(localStorage.getItem('userLogos') || '{}');
+                if (savedUserLogos[username]) {
+                    document.getElementById('userDashboardLogo').src = savedUserLogos[username];
+                }
+                
+                displayUserClients();
+                console.log('Regular user login successful');
+            } else {
+                alert('Usuário ou senha incorretos!');
+            }
+        }
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const newUsername = document.getElementById('newUsername').value;
+        const email = document.getElementById('email').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const logoInput = document.getElementById('userLogo');
+
+        if (newPassword !== confirmPassword) {
+            alert('As senhas não coincidem!');
+            return;
+        }
+        
+        // Store user data with actual password
+        userData[newUsername] = {
+            email: email,
+            password: newPassword,
+        };
+        
+        // Save userData to localStorage
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        // Initialize user clients array
+        userClients[newUsername] = [];
+        
+        // Save user's logo if one was uploaded
+        if(logoInput.files && logoInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Save logo to userLogos object and localStorage
+                userLogos[newUsername] = e.target.result;
+                
+                // Update localStorage with new user logo
+                const savedUserLogos = JSON.parse(localStorage.getItem('userLogos') || '{}');
+                savedUserLogos[newUsername] = e.target.result;
+                localStorage.setItem('userLogos', JSON.stringify(savedUserLogos));
+                
+                // Update user count
+                updateUserCount('add');
+
+                // Clear all input fields
+                document.getElementById('newUsername').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
+                document.getElementById('userLogo').value = '';
+
+                // Remove logo preview if exists
+                const existingPreview = document.querySelector('.logo-preview-container');
+                if (existingPreview) {
+                    existingPreview.remove();
+                }
+
+                // Show success message and switch to login form
+                alert('Cadastro realizado com sucesso!');
+                toggleForms('login');
+            }
+            reader.readAsDataURL(logoInput.files[0]);
+        } else {
+            if(newUsername && email && newPassword) {
+                // Clear all input fields
+                document.getElementById('newUsername').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
+                document.getElementById('userLogo').value = '';
+
+                // Remove logo preview if exists
+                const existingPreview = document.querySelector('.logo-preview-container');
+                if (existingPreview) {
+                    existingPreview.remove();
+                }
+
+                alert('Cadastro realizado com sucesso!');
+                toggleForms('login');
+            }
+        }
+    });
+
+    function toggleForms(form) {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        
+        if (form === 'register') {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            // Remove Delta System logo when showing register form
+            document.querySelector('.logo-container').style.display = 'none';
+        } else {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            // Show logo container for login form
+            document.querySelector('.logo-container').style.display = 'block';
+        }
+    }
+
+    function logout() {
+        document.querySelector('.container').style.display = 'block';
+        document.getElementById('adminDashboard').style.display = 'none';
+        document.getElementById('userDashboard').style.display = 'none';
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+        currentUser = null;
+    }
+
+    function updateLoginLogo(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            // Update both preview and login logo
+            const logoPreviewContainer = document.querySelector('.logo-preview-container');
+            const loginLogoContainer = document.querySelector('.logo-container');
+            
+            // Save to localStorage
+            localStorage.setItem('loginLogo', e.target.result);
+            
+            // Update preview in admin panel
+            logoPreviewContainer.innerHTML = `
+                <img src="${e.target.result}" alt="Preview do novo logo" 
+                     style="max-width: 150px; max-height: 150px; border-radius: 10px;">
+            `;
+            
+            // Update login logo
+            loginLogoContainer.innerHTML = `
+                <img src="${e.target.result}" alt="Logo de login" 
+                     style="width: 150px; height: 150px; border-radius: 50%;" 
+                     class="logo">
+            `;
+        }
+        
+        if(file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Add this to ensure the logo persists after page reload
+    window.addEventListener('load', function() {
+        const savedLogo = localStorage.getItem('loginLogo');
+        if (savedLogo) {
+            const loginLogoContainer = document.querySelector('.logo-container');
+            loginLogoContainer.innerHTML = `
+                <img src="${savedLogo}" alt="Logo de login" 
+                     style="width: 150px; height: 150px; border-radius: 50%;" 
+                     class="logo">
+            `;
+            
+            const logoPreviewContainer = document.querySelector('.logo-preview-container');
+            if (logoPreviewContainer) {
+                logoPreviewContainer.innerHTML = `
+                    <img src="${savedLogo}" alt="Logo atual" 
+                         style="max-width: 150px; max-height: 150px; border-radius: 10px;">
+                `;
+            }
+        }
+        
+        // Load saved user count
+        const savedCount = localStorage.getItem('userCount');
+        if (savedCount) {
+            document.querySelector('.admin-card:first-child p').textContent = savedCount;
+        }
+        
+        updateActiveUsersCount(); // Make sure count is updated on page load
+    });
+
+    function addClient() {
+        const stationName = document.getElementById('stationName').value;
+        const ipAddress = document.getElementById('ipAddress').value;
+        const ddns = document.getElementById('ddns').value;
+
+        if(stationName && ipAddress && ddns) {
+            const clientData = {
+                stationName,
+                ipAddress,
+                ddns
+            };
+            
+            userClients[currentUser].push(clientData);
+            displayUserClients();
+            updateTotalStations(); // Add this line to update count when adding
+
+            document.getElementById('stationName').value = '';
+            document.getElementById('ipAddress').value = '';
+            document.getElementById('ddns').value = '';
+        } else {
+            alert('Por favor, preencha todos os campos!');
+        }
+    }
+
+    function displayUserClients() {
+        const clientList = document.getElementById('clientList');
+        clientList.innerHTML = '';
+        
+        if (!userClients[currentUser]) return;
+        
+        userClients[currentUser].forEach((client, index) => {
+            const clientItem = document.createElement('div');
+            clientItem.classList.add('client-item');
+            
+            clientItem.innerHTML = `
+                <div class="client-grid">
+                    <div class="client-info">
+                        <strong>Posto:</strong><br>
+                        ${client.stationName}
+                    </div>
+                    <div class="client-info">
+                        <strong>IP:</strong> <a href="http://${client.ipAddress}" target="_blank" rel="noopener noreferrer">${client.ipAddress}</a><br>
+                        <strong>DDNS:</strong> <a href="http://${client.ddns}" target="_blank" rel="noopener noreferrer">${client.ddns}</a>
+                    </div>
+                    <button class="delete-btn" onclick="deleteClient(${index})">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            `;
+
+            clientList.appendChild(clientItem);
+        });
+    }
+
+    function deleteClient(index) {
+        if (confirm('Tem certeza que deseja excluir este cliente?')) {
+            userClients[currentUser].splice(index, 1);
+            displayUserClients();
+            updateTotalStations(); // Add this line to update count when deleting
+        }
+    }
+
+    document.getElementById('userLogo').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const previewContainer = document.createElement('div');
+            previewContainer.className = 'logo-preview-container';
+            previewContainer.innerHTML = `
+                <img src="${e.target.result}" alt="Preview do logo do usuário" 
+                     style="width: 150px; height: 150px; border-radius: 50%; margin-top: 10px;">
+            `;
+            
+            // Remove any existing preview
+            const existingPreview = document.querySelector('.logo-preview-container');
+            if (existingPreview) {
+                existingPreview.remove();
+            }
+            
+            // Add new preview after the file input
+            document.getElementById('userLogo').parentNode.appendChild(previewContainer);
+        }
+        
+        if(file) {
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.querySelector('.admin-card:first-child').addEventListener('click', showUsersList);
+
+    function showUsersList() {
+        document.getElementById('adminDashboard').style.display = 'none';
+        document.getElementById('usersListPage').style.display = 'block';
+        displayRegisteredUsers();
+    }
+
+    function backToAdmin() {
+        document.getElementById('adminDashboard').style.display = 'block';
+        document.getElementById('usersListPage').style.display = 'none';
+    }
+
+    function displayRegisteredUsers() {
+        const usersList = document.getElementById('usersList');
+        usersList.innerHTML = '';
+        
+        const savedUserLogos = JSON.parse(localStorage.getItem('userLogos') || '{}');
+        const savedUserData = JSON.parse(localStorage.getItem('userData') || '{}');
+        
+        Object.keys(savedUserLogos).forEach(username => {
+            const userCard = document.createElement('div');
+            userCard.className = 'user-card';
+            
+            const userData = savedUserData[username] || { email: 'N/A', password: 'N/A' };
+            
+            userCard.innerHTML = `
+                <img src="${savedUserLogos[username]}" alt="Logo do ${username}">
+                <div class="user-info">
+                    <h3>${username}</h3>
+                    <p><strong>Email:</strong> ${userData.email}</p>
+                    <p><strong>Senha:</strong> 
+                        <span class="password-field">
+                            <span class="password-text">********</span>
+                            <span class="actual-password" style="display: none;">${userData.password}</span>
+                            <i class="fas fa-eye password-toggle" onclick="togglePasswordVisibility(this)"></i>
+                        </span>
+                    </p>
+                    <p><strong>Clientes:</strong> ${userClients[username] ? userClients[username].length : 0}</p>
+                </div>
+                <button class="delete-btn" onclick="deleteUser('${username}')">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            `;
+            
+            usersList.appendChild(userCard);
+        });
+    }
+
+    function togglePasswordVisibility(eyeIcon) {
+        const passwordField = eyeIcon.parentElement;
+        const passwordText = passwordField.querySelector('.password-text');
+        const actualPassword = passwordField.querySelector('.actual-password');
+        
+        if (passwordText.style.display !== 'none') {
+            passwordText.style.display = 'none';
+            actualPassword.style.display = 'inline';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordText.style.display = 'inline';
+            actualPassword.style.display = 'none';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        }
+    }
+
+    function deleteUser(username) {
+        if (confirm(`Tem certeza que deseja excluir o usuário ${username}?`)) {
+            // Remove user logo
+            const savedUserLogos = JSON.parse(localStorage.getItem('userLogos') || '{}');
+            delete savedUserLogos[username];
+            localStorage.setItem('userLogos', JSON.stringify(savedUserLogos));
+            
+            // Remove user data
+            const savedUserData = JSON.parse(localStorage.getItem('userData') || '{}');
+            delete savedUserData[username];
+            localStorage.setItem('userData', JSON.stringify(savedUserData));
+            
+            // Remove user clients
+            delete userClients[username];
+            
+            // Update count
+            updateUserCount('subtract');
+            
+            // Refresh display
+            displayRegisteredUsers();
+        }
+    }
+
+    function updateUserCount(action) {
+        const currentCount = parseInt(document.querySelector('.admin-card:first-child p').textContent) || 0;
+        let newCount = currentCount;
+        
+        if (action === 'add') {
+            newCount = currentCount + 1;
+        } else if (action === 'subtract') {
+            newCount = Math.max(0, currentCount - 1);
+        }
+        
+        // Update display
+        document.querySelector('.admin-card:first-child p').textContent = newCount;
+        
+        // Save to localStorage for persistence
+        localStorage.setItem('userCount', newCount.toString());
+    }
+
+    // Add this function to count and update total stations
+    function updateTotalStations() {
+        let totalStations = 0;
+        
+        // Count stations across all users
+        Object.values(userClients).forEach(userClientList => {
+            totalStations += userClientList.length;
+        });
+        
+        // Update the card display
+        const stationsCard = document.querySelectorAll('.admin-card')[1].querySelector('p');
+        stationsCard.textContent = totalStations;
+    }
+
+    // Add this to count active users
+    function updateActiveUsersCount() {
+        const savedUserLogos = JSON.parse(localStorage.getItem('userLogos') || '{}');
+        const activeUsers = Object.keys(savedUserLogos).length;
+        
+        // Update the card content
+        const activeUsersCard = document.querySelector('.admin-card:first-child p');
+        if (activeUsersCard) {
+            activeUsersCard.textContent = activeUsers;
+        }
+    }
+
+    function sendPasswordRecoveryEmail(email) {
+        // Find user by email
+        const savedUserData = JSON.parse(localStorage.getItem('userData') || '{}');
+        let userFound = null;
+        
+        for (let username in savedUserData) {
+            if (savedUserData[username].email === email) {
+                userFound = {
+                    username: username,
+                    ...savedUserData[username]
+                };
+                break;
+            }
+        }
+
+        if (!userFound) {
+            alert('Email não encontrado no sistema.');
+            return;
+        }
+
+        // Create mailto link with pre-filled content
+        const subject = 'Recuperação de Senha';
+        const body = `Olá ${userFound.username},\n\nSua senha atual é: ${userFound.password}\n\nAtenciosamente,\nSistema de Login`;
+        
+        // Open default email client
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    function handleForgotPassword(e) {
+        e.preventDefault();
+        const email = prompt('Por favor, digite seu email para recuperar a senha:');
+        
+        if (email) {
+            sendPasswordRecoveryEmail(email);
+        }
+    }
+
+    // Update the forgot password link in HTML
+    document.querySelector('.forgot-password a').onclick = handleForgotPassword;
+
+    function toggleLoginPasswordVisibility(eyeIcon) {
+        const passwordInput = eyeIcon.parentElement.querySelector('input');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        }
+    }
+
+    function toggleRegisterPasswordVisibility(eyeIcon) {
+        const passwordInput = eyeIcon.parentElement.querySelector('input');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        }
+    }
+    </script>
+</body></html>
